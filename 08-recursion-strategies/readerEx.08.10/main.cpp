@@ -1,3 +1,41 @@
+Simpler way to solve this problem using recursion
+using namespace std;
+void ListMnemonics(string number);
+void MnemonicsCombinations(string number, string code, Map<int, string> & buttonLetters);
+
+int main() {
+    ListMnemonics("723"); // you can put in a getLine function to get user input instead of having a fixed string
+    return 0;
+ }
+
+void ListMnemonics(string number){
+    Map<int, string> buttons;
+    buttons.add(2, "ABC");
+    buttons.add(3, "DEF");
+    buttons.add(4, "GHI");
+    buttons.add(5, "JKL");
+    buttons.add(6, "MNO");
+    buttons.add(7, "PQRS");
+    buttons.add(8, "TUV");
+    buttons.add(9, "WXYZ");
+        MnemonicsCombinations(number, "", buttons);  //recursive function
+
+}
+void MnemonicsCombinations(string number, string code, Map<int, string> & buttonLetters){
+    if(number.length() == 0){
+        cout << code << endl;
+    }else{
+        string letters = buttonLetters[digittoint(number[0])];
+        for (int i = 0 ; i < letters.length();i++) {
+            string newCode = code + letters[i];
+             MnemonicsCombinations(number.substr(1), newCode, buttonLetters );
+        }
+    }
+}
+
+
+
+
 //
 // main.cpp
 //
